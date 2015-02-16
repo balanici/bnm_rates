@@ -1,4 +1,15 @@
 <?php
-//module file
+/**
+ * @file
+ * The bnm_rates module displays exchange rates information from bnm.org.
+ */
 
-
+/**
+ * Implements hook_help().
+ */
+function bnm_rates_help($path, $arg) {
+  if ($path == 'admin/help#bnm_rates') {
+    return t('To use this module, go to the admin/modules page and ' .
+      'enable bnm_rates module in IDOCTOR FINANCIAL section.');
+  }
+}

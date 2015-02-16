@@ -1,2 +1,9 @@
-#info file
+name = BNM Exchange Rates
+description = Gets exchange rates from BNM.org
+package = idoctor Financial
+version = VERSION
+core = 7.x
+php = 5.4
 
+stylesheets[all][] = css/bnm_rates.css
+scripts[] = js/bnm_rates.js
