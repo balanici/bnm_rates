@@ -1,7 +1,12 @@
 <?php
+// $Id$
+
 /**
  * @file
  * The bnm_rates module displays exchange rates information from bnm.org.
+ *
+ * This module provides a block that lists all of the
+ * exchange rates for today.
  */
 
 /**
@@ -9,7 +14,118 @@
  */
 function bnm_rates_help($path, $arg) {
   if ($path == 'admin/help#bnm_rates') {
-    return t('To use this module, go to the admin/modules page and ' .
-      'enable bnm_rates module in IDOCTOR FINANCIAL section.');
+    return t('Module bnm_rates pulls xml from bnm.org and displays exchange rates');
   }
+}
+
+//series of functions for displaing a block: hook_info, hook_block
+
+/**
+ * Implements hook_block_info().
+ */
+function bnm_rates_block_info() {
+  $blocks['block_typical'] = array(
+    'info' => t('BNM Typical rates'),
+    //'cache' => DRUPAL_NO_CACHE,
+  );
+/*
+  $blocks['recent'] = array(
+    'info' => t('Recent content'),
+    // DRUPAL_CACHE_PER_ROLE will be assumed.
+  );
+*/
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function bnm_rates_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'block_typical': //block_typical got from previous hook_block_info
+      $block['subject'] = t('Typical rates');
+      $block['content'] = array(
+        '#theme' => 'bnm_rates_block_typical',
+        //'#url' => 'rss.xml',
+        '#title' => t('Typical rates'),
+      );
+      break;
+
+/*
+    case 'recent':
+      if (user_access('access content')) {
+        $block['subject'] = t('Recent content');
+        if ($nodes = node_get_recent(variable_get('node_recent_block_count', 10))) {
+          $block['content'] = array(
+            '#theme' => 'node_recent_block',
+            '#nodes' => $nodes,
+          );
+        }
+        else {
+          $block['content'] = t('No content available.');
+        }
+      }
+      break;
+      */
+  }
+  return $block;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function bnm_rates_theme($existing, $type, $theme, $path)
+{
+    $bnm_rates_themes = array(
+        'bnm_rates_block_typical' => array(
+            'variables' => array('vars' => NULL),
+            'template' => 'templates/block_typical',
+        ),
+        'bnm_rates_page_typical' => array(
+            'variables' => array('vars' => NULL),
+            'template' => 'templates/page_typical',
+        ),
+        'bnm_rates_page_all' => array(
+            'variables' => array('vars' => NULL),
+            'template' => 'templates/page_all',
+        ),
+    );
+
+    return $bnm_rates_themes;
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function bnm_rates_menu()
+{
+    // define your custom path here
+    $items['bnm-rates'] = array(
+        'page callback' => 'bnm_rates_page_all',
+        'page arguments' => array(),
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+
+    return $items;
+}
+
+
+
+
+////this will be moved out to .inc file
+function bnm_rates_page_all() {
+
+    $vars = array(
+        'name' => 'test igor'
+    );
+
+    return theme('bnm_rates_page_all', array('vars' => $vars));
 }
