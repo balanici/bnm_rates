@@ -7,7 +7,7 @@ package = idoctor Financial
 version = VERSION
 core = 7.x
 php = 5.4
-files[] = bnm_rates.module
+;files[] = bnm_rates.module
 
 
 stylesheets[all][] = css/bnm_rates.css
