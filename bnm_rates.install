@@ -1,1 +1,119 @@
 <?php
+// $Id$
+
+/**
+ * @file
+ * The bnm_rates .install file. Creates tables
+ *
+ * This module provides a lists all of the
+ * exchange rates for today.
+ */
+
+/**
+ * Implements hook_schema
+ */
+function bnm_rates_schema () {
+    $schema['bnm_currency'] = array(
+        'description' => 'The table for currencies.',
+        'fields' => array(
+            'cid' => array(
+                'description' => 'The primary identifier for a currency.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'valute_id' => array(
+                'description' => 'Valute ID from the xml',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => -1,
+            ),
+            'num_code' => array(
+                'description' => 'The ISO 4217 numerical code of currency',
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+
+            'char_code' => array(
+                'description' => 'The ISO 4217 char code of the currency.',
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'nominal' => array(
+                'description' => 'Currency nominal',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => -1,
+            ),
+            'currency_name' => array(
+                'description' => 'The name of currency according to ISO 4217.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'lang' => array(
+                'description' => 'Language',
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => TRUE,
+                'default' => 'en',
+            ),
+        ),
+        'primary key' => array('cid'),
+    );
+
+
+    $schema['bnm_exchange_rate'] = array(
+        'description' => 'The table for currencies.',
+        'fields' => array(
+            'rid' => array(
+                'description' => 'The primary identifier for a rate row.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'valute_id' => array(
+                'description' => 'Valute ID from the bnm_currency',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => -1,
+            ),
+            'date' => array(
+                'description' => 'The date of exchange rate',
+                'type' => 'varchar',
+                'length' => 10,
+                'not null' => TRUE,
+            ),
+            'value' => array(
+                'description' => 'The exchange rate value.',
+                'type' => 'float',
+                'size' => 'big',
+                'not null' => true,
+            ),
+
+
+        ),
+        'primary key' => array('rid'),
+
+    );
+    return $schema;
+}
+
+/**
+ * Implements of hook_install
+ */
+function bnm_rates_install() {
+    drupal_install_schema('bnm_rates');
+}
+
+/**
+ * Implements hook_uninstall
+ */
+function bnm_rates_uninstall() {
+    drupal_uninstall_schema('bnm_rates');
+}
