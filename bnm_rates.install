@@ -95,8 +95,6 @@ function bnm_rates_schema () {
                 'size' => 'big',
                 'not null' => true,
             ),
-
-
         ),
         'primary key' => array('rid'),
 
@@ -108,12 +106,13 @@ function bnm_rates_schema () {
  * Implements of hook_install
  */
 function bnm_rates_install() {
-    drupal_install_schema('bnm_rates');
+//    watchdog('install', 'bnm_rates_install function');
 }
 
 /**
  * Implements hook_uninstall
  */
 function bnm_rates_uninstall() {
-    drupal_uninstall_schema('bnm_rates');
+//    watchdog('install', 'bnm_rates_uninstall function');
+//    drupal_uninstall_schema('bnm_rates');
 }
