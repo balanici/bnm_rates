@@ -16,17 +16,17 @@ function bnm_rates_schema () {
     $schema['bnm_currency'] = array(
         'description' => 'The table for currencies.',
         'fields' => array(
-            'cid' => array(
+            /*'cid' => array(
                 'description' => 'The primary identifier for a currency.',
                 'type' => 'serial',
                 'unsigned' => TRUE,
                 'not null' => TRUE,
-            ),
+            ),*/
             'valute_id' => array(
                 'description' => 'Valute ID from the xml',
                 'type' => 'int',
                 'not null' => TRUE,
-                'default' => -1,
+//                'default' => -1,
             ),
             'num_code' => array(
                 'description' => 'The ISO 4217 numerical code of currency',
@@ -64,7 +64,8 @@ function bnm_rates_schema () {
                 'default' => 'en',
             ),
         ),
-        'primary key' => array('cid'),
+        'primary key' => array('valute_id','lang'),
+//        'unique keys' => array('valute-lang' => array('valute_id', 'lang')),
     );
 
 
@@ -81,7 +82,7 @@ function bnm_rates_schema () {
                 'description' => 'Valute ID from the bnm_currency',
                 'type' => 'int',
                 'not null' => TRUE,
-                'default' => -1,
+//                'default' => -1,
             ),
             'date' => array(
                 'description' => 'The date of exchange rate',
@@ -97,7 +98,7 @@ function bnm_rates_schema () {
             ),
         ),
         'primary key' => array('rid'),
-
+        'unique keys' => array('valute-date' => array('valute_id', 'date')),
     );
     return $schema;
 }

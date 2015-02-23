@@ -1,2 +1,3 @@
-<?php
-var_dump($vars);
+<pre>
+    <?php print_r($vars); ?>
+</pre>

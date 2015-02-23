@@ -161,6 +161,6 @@ function bnm_rates_page_all() {
 
 function bnm_rates_test_page() {
 
-    $vars['xmldata'] = bnm_rates_get_xmlobj();
+    $vars['xmldata'] = bnm_rates_pull_xmldata();
     return theme ('bnm_rates_test_page', array('vars' => $vars));
 }
