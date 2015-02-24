@@ -28,30 +28,27 @@ function bnm_rates_help($path, $arg) {
 /**
  * Implements hook_menu().
  */
-function bnm_rates_menu()
-{
-    // define your custom path here
-    $items['bnm-rates'] = array(
-        'page callback' => 'bnm_rates_page_all',
-        'page arguments' => array(),
-        'access arguments' => array('access content'),
-        'type' => MENU_CALLBACK,
-        'file' => 'include/bnm_rates_functions.inc.php',
-    );
+function bnm_rates_menu() {
+  // define your custom path here
+  $items['bnm-rates'] = array(
+    'page callback' => 'bnm_rates_page_all',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'include/bnm_rates_functions.inc.php',
+  );
 
 
-
-    $items['bnm-rates-test-page'] = array(
-        'page callback' => 'bnm_rates_test_page',
-        'page arguments' => array(),
-        'access arguments' => array('access content'),
-        'type' => MENU_CALLBACK,
-        'file' => 'include/bnm_rates_functions.inc.php',
-    );
-
+  $items['bnm-rates-test-page'] = array(
+    'page callback' => 'bnm_rates_test_page',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'include/bnm_rates_functions.inc.php',
+  );
 
 
-    return $items;
+  return $items;
 }
 
 
@@ -65,12 +62,12 @@ function bnm_rates_block_info() {
     'info' => t('BNM Typical rates'),
     //'cache' => DRUPAL_NO_CACHE,
   );
-/*
-  $blocks['recent'] = array(
-    'info' => t('Recent content'),
-    // DRUPAL_CACHE_PER_ROLE will be assumed.
-  );
-*/
+  /*
+    $blocks['recent'] = array(
+      'info' => t('Recent content'),
+      // DRUPAL_CACHE_PER_ROLE will be assumed.
+    );
+  */
 
   return $blocks;
 }
@@ -92,22 +89,22 @@ function bnm_rates_block_view($delta = '') {
       );
       break;
 
-/*
-    case 'recent':
-      if (user_access('access content')) {
-        $block['subject'] = t('Recent content');
-        if ($nodes = node_get_recent(variable_get('node_recent_block_count', 10))) {
-          $block['content'] = array(
-            '#theme' => 'node_recent_block',
-            '#nodes' => $nodes,
-          );
-        }
-        else {
-          $block['content'] = t('No content available.');
-        }
-      }
-      break;
-      */
+    /*
+        case 'recent':
+          if (user_access('access content')) {
+            $block['subject'] = t('Recent content');
+            if ($nodes = node_get_recent(variable_get('node_recent_block_count', 10))) {
+              $block['content'] = array(
+                '#theme' => 'node_recent_block',
+                '#nodes' => $nodes,
+              );
+            }
+            else {
+              $block['content'] = t('No content available.');
+            }
+          }
+          break;
+          */
   }
   return $block;
 }
@@ -116,51 +113,45 @@ function bnm_rates_block_view($delta = '') {
 /**
  * Implements hook_theme().
  */
-function bnm_rates_theme($existing, $type, $theme, $path)
-{
-    $bnm_rates_themes = array(
-        'bnm_rates_block_typical' => array(
-            'variables' => array('vars' => NULL),
-            'template' => 'templates/block_typical',
-        ),
-        'bnm_rates_page_typical' => array(
-            'variables' => array('vars' => NULL),
-            'template' => 'templates/page_typical',
-        ),
-        'bnm_rates_page_all' => array(
-            'variables' => array('vars' => NULL),
-            'template' => 'templates/page_all',
-        ),
-        'bnm_rates_test_page' => array(
-            'variables' => array('vars' => NULL),
-            'template' => 'templates/test_page',
-        ),
+function bnm_rates_theme($existing, $type, $theme, $path) {
+  $bnm_rates_themes = array(
+    'bnm_rates_block_typical' => array(
+      'variables' => array('vars' => NULL),
+      'template' => 'templates/block_typical',
+    ),
+    'bnm_rates_page_typical' => array(
+      'variables' => array('vars' => NULL),
+      'template' => 'templates/page_typical',
+    ),
+    'bnm_rates_page_all' => array(
+      'variables' => array('vars' => NULL),
+      'template' => 'templates/page_all',
+    ),
+    'bnm_rates_test_page' => array(
+      'variables' => array('vars' => NULL),
+      'template' => 'templates/test_page',
+    ),
 
-    );
+  );
 
-    return $bnm_rates_themes;
+  return $bnm_rates_themes;
 }
-
-
-
-
 
 
 ////this will be moved out to .inc file
 function bnm_rates_page_all() {
 
-    $vars = array(
-        'name' => 'test igor ' . bnm_rates_probe('Hello'),
+  $vars = array(
+    'name' => 'test igor ' . bnm_rates_probe('Hello'),
 
-    );
+  );
 
-    return theme('bnm_rates_page_all', array('vars' => $vars));
+  return theme('bnm_rates_page_all', array('vars' => $vars));
 }
-
 
 
 function bnm_rates_test_page() {
 
-    $vars['xmldata'] = bnm_rates_pull_xmldata();
-    return theme ('bnm_rates_test_page', array('vars' => $vars));
+  $vars['xmldata'] = bnm_rates_pull_xmldata();
+  return theme('bnm_rates_test_page', array('vars' => $vars));
 }
