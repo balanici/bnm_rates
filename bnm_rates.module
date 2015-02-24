@@ -13,6 +13,7 @@
  * Implements hook_init().
  */
 function bnm_rates_init() {
+  global $language;
 
 }
 
@@ -58,8 +59,8 @@ function bnm_rates_menu() {
  * Implements hook_block_info().
  */
 function bnm_rates_block_info() {
-  $blocks['block_typical'] = array(
-    'info' => t('BNM Typical rates'),
+  $blocks['block_bnm_rates'] = array(
+    'info' => t('BNM currency rates'),
     //'cache' => DRUPAL_NO_CACHE,
   );
   /*
@@ -76,35 +77,27 @@ function bnm_rates_block_info() {
  * Implements hook_block_view().
  */
 function bnm_rates_block_view($delta = '') {
+  global $language;
   // This example is adapted from node.module.
   $block = array();
 
+  $date = date("d.m.Y");
+  $lang = $language->language;
   switch ($delta) {
-    case 'block_typical': //block_typical got from previous hook_block_info
-      $block['subject'] = t('Typical rates');
-      $block['content'] = array(
-        '#theme' => 'bnm_rates_block_typical',
-        //'#url' => 'rss.xml',
-        '#title' => t('Typical rates'),
-      );
+    case 'block_bnm_rates': //block_typical got from previous hook_block_info
+      $block['subject'] = t('BNM currency rates');
+      module_load_include('php', 'bnm_rates', 'include/bnm_rates_functions.inc');
+//      module_load_include('php', 'bnm_rates', 'bnm_rates_functions.inc');
+      if ($rates = bnm_rates_get($date, $lang)) {
+        $block['content'] = array(
+          '#theme' => 'bnm_rates_block_rates',
+          '#title' => t('BNM currency rates'),
+          '#rates' => $rates,
+        );
+      } else {
+        $block['content'] = t('No content available.');
+      }
       break;
-
-    /*
-        case 'recent':
-          if (user_access('access content')) {
-            $block['subject'] = t('Recent content');
-            if ($nodes = node_get_recent(variable_get('node_recent_block_count', 10))) {
-              $block['content'] = array(
-                '#theme' => 'node_recent_block',
-                '#nodes' => $nodes,
-              );
-            }
-            else {
-              $block['content'] = t('No content available.');
-            }
-          }
-          break;
-          */
   }
   return $block;
 }
@@ -115,9 +108,9 @@ function bnm_rates_block_view($delta = '') {
  */
 function bnm_rates_theme($existing, $type, $theme, $path) {
   $bnm_rates_themes = array(
-    'bnm_rates_block_typical' => array(
-      'variables' => array('vars' => NULL),
-      'template' => 'templates/block_typical',
+    'bnm_rates_block_rates' => array(
+      'variables' => array('rates' => NULL, 'limit' => 10),
+      'template' => 'templates/bnm_rates_block_rates',
     ),
     'bnm_rates_page_typical' => array(
       'variables' => array('vars' => NULL),
@@ -151,7 +144,9 @@ function bnm_rates_page_all() {
 
 
 function bnm_rates_test_page() {
-
-  $vars['xmldata'] = bnm_rates_pull_xmldata();
+  global $language;
+  $date = date("d.m.Y");
+  $lang = $language->language;
+  $vars['exchange-rates'] = bnm_rates_get($date, $lang);
   return theme('bnm_rates_test_page', array('vars' => $vars));
 }
