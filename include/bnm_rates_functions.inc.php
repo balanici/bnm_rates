@@ -89,6 +89,9 @@ function bnm_rates_get($date = '', $lang = 'en') {
   if (empty($date)) {
     $date = date("d.m.Y");
   }
+  if (in_array($lang, array('ro', 'mo'))) {
+    $lang = 'md';
+  }
   $query = db_query("SELECT valute_id, value, num_code, char_code, nominal,currency_name, lang, date
             FROM {bnm_exchange_rate} ber
             INNER JOIN {bnm_currency} bc using(valute_id)
@@ -97,6 +100,10 @@ function bnm_rates_get($date = '', $lang = 'en') {
             ORDER BY currency_name", array(':date' => $date, ':lang' => $lang));
   $result = $query->fetchAll();
 
+  if (empty($result)) {
+    bnm_rates_pull_xmldata($date, $lang);
+    drupal_goto($GLOBALS['_GET']['q']);
+  }
 
   return $result;
   //if no then bnm_rates_pull_xmldata($date = $date, $lang = $lang)
