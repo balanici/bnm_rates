@@ -1,12 +1,11 @@
 <?php
+// $Id$
 
 /**
- * @param $arg
- * @return mixed
+ * @file
+ * Functions which are not to be inside a .module.
  */
-function bnm_rates_probe($arg) {
-  return $arg;
-}
+
 
 /**
  * Retrieves xmldata from bnm.org
@@ -19,15 +18,10 @@ function bnm_rates_probe($arg) {
  * @author idoctor
  */
 function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
-  //link http://www.bnm.md/md/official_exchange_rates?get_xml=1&date=20.01.2015
-  //just for today if empty
   if (empty($date)) {
     $date = date("d.m.Y");
   }
   $url = "http://www.bnm.md/{$lang}/official_exchange_rates?get_xml=1&date={$date}";
-
-  //for dev
-//    $url = drupal_get_path('module', 'bnm_rates') . '/official_exchange_rates.xml';
 
   $simple_xml = simplexml_load_file($url);
   if ($simple_xml) {
@@ -43,6 +37,10 @@ function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
 
 /**
  * Stores xmldata into database
+ * @param $simple_xml object
+ * @param $lang
+ * @throws \Exception
+ * @throws \InvalidMergeQueryException
  */
 function bnm_rates_store_data($simple_xml, $lang) {
   $attribs = $simple_xml->attributes();
@@ -61,7 +59,7 @@ function bnm_rates_store_data($simple_xml, $lang) {
           'char_code' => (string) $valute->CharCode,
           'nominal' => (int) $valute->Nominal,
           'currency_name' => (string) $valute->Name,
-//                    'lang' => $lang,
+          'in_block' => (string) '1',
         ))
       ->execute();
 
@@ -84,19 +82,25 @@ function bnm_rates_store_data($simple_xml, $lang) {
  * if there is no result from bnm_rates-pull-xmldata then log this event into watchdog
  * @param string $date
  * @param string $lang
+ * @param bool $in_block
+ * @return mixed
  */
-function bnm_rates_get($date = '', $lang = 'en') {
+function bnm_rates_get($date = '', $lang = 'en', $in_block = false) {
   if (empty($date)) {
     $date = date("d.m.Y");
   }
   if (in_array($lang, array('ro', 'mo'))) {
     $lang = 'md';
   }
+  if ($in_block) {
+    $in_block_where = ' AND in_block = 1 ';
+  }
   $query = db_query("SELECT valute_id, value, num_code, char_code, nominal,currency_name, lang, date
             FROM {bnm_exchange_rate} ber
             INNER JOIN {bnm_currency} bc using(valute_id)
-            WHERE ber.date = :date
-            AND bc.lang = :lang
+            WHERE ber.date = :date ".
+            $in_block_where .
+            "AND bc.lang = :lang
             ORDER BY currency_name", array(':date' => $date, ':lang' => $lang));
   $result = $query->fetchAll();
 
@@ -106,8 +110,4 @@ function bnm_rates_get($date = '', $lang = 'en') {
   }
 
   return $result;
-  //if no then bnm_rates_pull_xmldata($date = $date, $lang = $lang)
-
-  //select rate and nominal, so you can calculate and display it correct
-  //return array of objects of rates
 }

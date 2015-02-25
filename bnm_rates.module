@@ -1,5 +1,5 @@
 <?php
-// $Id$
+/** $Id$ */
 
 /**
  * @file
@@ -13,12 +13,15 @@
  * Implements hook_init().
  */
 function bnm_rates_init() {
-  global $language;
 
 }
 
 /**
  * Implements hook_help().
+ *
+ * @param $path String
+ * @param $arg mixed
+ * @return null|string
  */
 function bnm_rates_help($path, $arg) {
   if ($path == 'admin/help#bnm_rates') {
@@ -28,53 +31,34 @@ function bnm_rates_help($path, $arg) {
 
 /**
  * Implements hook_menu().
+ *
+ * @return mixed
  */
+
 function bnm_rates_menu() {
-  // define your custom path here
-  $items['bnm-rates'] = array(
-    'page callback' => 'bnm_rates_page_all',
-    'page arguments' => array(),
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-    'file' => 'include/bnm_rates_functions.inc.php',
-  );
 
-
-  $items['bnm-rates-test-page'] = array(
-    'page callback' => 'bnm_rates_test_page',
-    'page arguments' => array(),
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-    'file' => 'include/bnm_rates_functions.inc.php',
-  );
-
-
-  return $items;
 }
 
 
-//series of functions for displaing a block: hook_info, hook_block
 
 /**
  * Implements hook_block_info().
+ *
+ * @return mixed
  */
 function bnm_rates_block_info() {
   $blocks['block_bnm_rates'] = array(
     'info' => t('BNM currency rates'),
-    //'cache' => DRUPAL_NO_CACHE,
   );
-  /*
-    $blocks['recent'] = array(
-      'info' => t('Recent content'),
-      // DRUPAL_CACHE_PER_ROLE will be assumed.
-    );
-  */
 
   return $blocks;
 }
 
 /**
  * Implements hook_block_view().
+ *
+ * @param string $delta
+ * @return array
  */
 function bnm_rates_block_view($delta = '') {
   global $language;
@@ -84,17 +68,17 @@ function bnm_rates_block_view($delta = '') {
   $date = date("d.m.Y");
   $lang = $language->language;
   switch ($delta) {
-    case 'block_bnm_rates': //block_typical got from previous hook_block_info
-      $block['subject'] = t('BNM currency rates');
+    case 'block_bnm_rates':
+      $block['subject'] = t('BNM currency rates @date', array('@date' => $date));
       module_load_include('php', 'bnm_rates', 'include/bnm_rates_functions.inc');
-//      module_load_include('php', 'bnm_rates', 'bnm_rates_functions.inc');
-      if ($rates = bnm_rates_get($date, $lang)) {
+      if ($rates = bnm_rates_get($date, $lang, 1)) {
         $block['content'] = array(
           '#theme' => 'bnm_rates_block_rates',
           '#title' => t('BNM currency rates'),
           '#rates' => $rates,
         );
-      } else {
+      }
+      else {
         $block['content'] = t('No content available.');
       }
       break;
@@ -105,6 +89,12 @@ function bnm_rates_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
+ *
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ * @return array
  */
 function bnm_rates_theme($existing, $type, $theme, $path) {
   $bnm_rates_themes = array(
@@ -112,41 +102,7 @@ function bnm_rates_theme($existing, $type, $theme, $path) {
       'variables' => array('rates' => NULL, 'limit' => 10),
       'template' => 'templates/bnm_rates_block_rates',
     ),
-    'bnm_rates_page_typical' => array(
-      'variables' => array('vars' => NULL),
-      'template' => 'templates/page_typical',
-    ),
-    'bnm_rates_page_all' => array(
-      'variables' => array('vars' => NULL),
-      'template' => 'templates/page_all',
-    ),
-    'bnm_rates_test_page' => array(
-      'variables' => array('vars' => NULL),
-      'template' => 'templates/test_page',
-    ),
-
   );
 
   return $bnm_rates_themes;
-}
-
-
-////this will be moved out to .inc file
-function bnm_rates_page_all() {
-
-  $vars = array(
-    'name' => 'test igor ' . bnm_rates_probe('Hello'),
-
-  );
-
-  return theme('bnm_rates_page_all', array('vars' => $vars));
-}
-
-
-function bnm_rates_test_page() {
-  global $language;
-  $date = date("d.m.Y");
-  $lang = $language->language;
-  $vars['exchange-rates'] = bnm_rates_get($date, $lang);
-  return theme('bnm_rates_test_page', array('vars' => $vars));
 }

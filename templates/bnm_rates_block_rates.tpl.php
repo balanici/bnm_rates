@@ -4,7 +4,6 @@
  * @file bnm_rates_block_rates.tpl.php
  * Template for typical(most viewed) exchange rates
  */
-//var_dump($variables);
 $limit = $variables['limit'];
 ?>
 <div id="bnm-rates-block-rates">

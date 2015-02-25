@@ -1,3 +1,5 @@
 /**
- * Created by igor on 2/17/15.
+ * @file
+ *
+ * Created on 2/17/15.
  */

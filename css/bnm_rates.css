@@ -1,3 +1,5 @@
+/* $Id$*/
+
 /*bnm-rates-block-rates*/
 #bnm-rates-block-rates .currency_value {
     font-weight: bold;
@@ -6,7 +8,6 @@
     width: 30%;
 }
 #bnm-rates-block-rates .currency-name {
-    /*float: left;*/
     width: 70%;
     word-wrap: break-word;
 }
