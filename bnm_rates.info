@@ -1,13 +1,8 @@
-;$Id$
-
-;https://github.com/igori1/bnm_rates/
 name = BNM Exchange Rates
 description = Gets exchange rates from BNM.org
 package = IDoctor
-version = VERSION 7.x-1.0
 core = 7.x
 php = 5.4
-;files[] = bnm_rates.module
 
 stylesheets[all][] = css/bnm_rates.css
 scripts[] = js/bnm_rates.js

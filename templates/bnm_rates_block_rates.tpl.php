@@ -1,5 +1,4 @@
 <?php
-//$Id$
 /**
  * @file bnm_rates_block_rates.tpl.php
  * Template for typical(most viewed) exchange rates

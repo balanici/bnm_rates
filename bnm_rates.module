@@ -1,6 +1,4 @@
 <?php
-/** $Id$ */
-
 /**
  * @file
  * The bnm_rates module displays exchange rates information from bnm.org.
@@ -89,12 +87,6 @@ function bnm_rates_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
- *
- * @param $existing
- * @param $type
- * @param $theme
- * @param $path
- * @return array
  */
 function bnm_rates_theme($existing, $type, $theme, $path) {
   $bnm_rates_themes = array(

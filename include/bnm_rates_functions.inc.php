@@ -1,6 +1,4 @@
 <?php
-// $Id$
-
 /**
  * @file
  * Functions which are not to be inside a .module.
@@ -14,8 +12,6 @@
  * @param string $date
  * @param string $lang
  * @return SimpleXMLElement
- *
- * @author idoctor
  */
 function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
   if (empty($date)) {
@@ -62,6 +58,7 @@ function bnm_rates_store_data($simple_xml, $lang) {
           'in_block' => (string) '1',
         ))
       ->execute();
+    watchdog('bnm_rates', t('Saved @currency_record', array('@currency_record' => $currency_record)));
 
     $rates_record = db_merge('bnm_exchange_rate')
       ->key(array(
@@ -72,6 +69,7 @@ function bnm_rates_store_data($simple_xml, $lang) {
         'value' => (float) $valute->Value
       ))
       ->execute();
+    watchdog('bnm_rates', t('Saved @rates_record', array('@rates_record' => $rates_record)));
   }
 }
 
