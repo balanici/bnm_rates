@@ -37,7 +37,7 @@ function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
 }
 
 /**
- * Stores xmldata into database.
+ * Saves xmldata into database.
  *
  * @param SimpleXMLElement $simple_xml
  *   The simple_xml object to foreach in.
