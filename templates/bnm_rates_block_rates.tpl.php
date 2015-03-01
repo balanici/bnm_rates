@@ -1,8 +1,8 @@
 <?php
 /**
- * @file bnm_rates_block_rates.tpl.php
+ * @file The bnm_rates_block_rates.tpl.php.
  *
- * Template for typical(most viewed) exchange rates
+ * Template for typical(most viewed) exchange rates.
  */
 $limit = $variables['limit'];
 ?>

@@ -8,19 +8,16 @@
  */
 
 /**
- * Implements hook_init().
- */
-function bnm_rates_init() {
-
-}
-
-/**
  * Implements hook_help().
  *
- * @param string
- * @param mixed
+ * @param string $path
+ *   Url path
+ * @param mixed $arg
+ *   Args passed to function.
+ *   See on drupal.org for this hook.
  *
  * @return null|string
+ *   Return a result from function.
  */
 function bnm_rates_help($path, $arg) {
   if ($path == 'admin/help#bnm_rates') {
@@ -29,16 +26,10 @@ function bnm_rates_help($path, $arg) {
 }
 
 /**
- * Implements hook_menu().
- * @return mixed
- */
-function bnm_rates_menu() {
-
-}
-
-/**
  * Implements hook_block_info().
- * @return mixed
+ *
+ * @return array $block
+ *   Contains array with info to display on blocks list in admin backend.
  */
 function bnm_rates_block_info() {
   $blocks['block_bnm_rates'] = array(
@@ -51,9 +42,10 @@ function bnm_rates_block_info() {
 /**
  * Implements hook_block_view().
  *
- * @param string
- *
- * @return array
+ * @param string $delta
+ *   The block id
+ * @return array $block
+ *   This array contains info about blocks for this module.
  */
 function bnm_rates_block_view($delta = '') {
   global $language;

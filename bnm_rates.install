@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * The bnm_rates .install file. Creates tables
+ * The bnm_rates .install file. Creates tables.
  *
  * This module provides a lists all of the
  * exchange rates for today.
@@ -9,8 +9,8 @@
 
 /**
  * Implements hook_schema().
- *
- * @return mixed
+ * @return array $schema
+ *   Array which contains info about tables fields.
  */
 function bnm_rates_schema() {
   $schema['bnm_currency'] = array(
