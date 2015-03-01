@@ -5,6 +5,8 @@
  *
  * This module provides a lists all of the
  * exchange rates for today.
+ *
+ * @author Igor Balainci <igor.balanici@gmail.com>
  */
 
 /**

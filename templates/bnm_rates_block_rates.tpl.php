@@ -3,6 +3,8 @@
  * @file The bnm_rates_block_rates.tpl.php.
  *
  * Template for typical(most viewed) exchange rates.
+ *
+ * @author Igor Balainci <igor.balanici@gmail.com>
  */
 $limit = $variables['limit'];
 ?>

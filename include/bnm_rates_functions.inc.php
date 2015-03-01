@@ -2,6 +2,8 @@
 /**
  * @file
  * Functions which are not to be inside a .module.
+ *
+ * @author Igor Balainci <igor.balanici@gmail.com>
  */
 
 /**
