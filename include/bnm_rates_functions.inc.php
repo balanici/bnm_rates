@@ -7,14 +7,14 @@
 /**
  * Retrieves xmldata from bnm.org and stores into the DB.
  *
- * @param string date
- *  The date of currency rates.
- * @param string lang
- *  Language ('en', 'ru', 'ro', 'mo' or 'md'.
- *  ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
+ * @param string $date
+ *   The date of currency rates.
+ * @param string $lang
+ *   Language ('en', 'ru', 'ro', 'mo' or 'md'.
+ *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
  *
- * @return SimpleXMLElement simple_xml
- *  The simple_xml object to foreach in.
+ * @return SimpleXMLElement $simple_xml
+ *   The simple_xml object to foreach in.
  */
 function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
   if (empty($date)) {
@@ -37,12 +37,12 @@ function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
 /**
  * Stores xmldata into database.
  *
- * @param SimpleXMLElement simple_xml
- *  The simple_xml object to foreach in.
+ * @param SimpleXMLElement $simple_xml
+ *   The simple_xml object to foreach in.
  *
- * @param string lang
- *  Language ('en', 'ru', 'ro', 'mo' or 'md'.
- *  ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
+ * @param string $lang
+ *   Language ('en', 'ru', 'ro', 'mo' or 'md'.
+ *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
  *
  * @throws \Exception
  * @throws \InvalidMergeQueryException
@@ -90,12 +90,12 @@ function bnm_rates_store_data($simple_xml, $lang) {
  * if there is no result from bnm_rates-pull-xmldata then log this event into
  * watchdog.
  *
- * @param string date
+ * @param string $date
  *   The date of currency rates.
- * @param string lang
+ * @param string $lang
  *   Language ('en', 'ru', 'ro', 'mo' or 'md'.
  *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
- * @param boolean in_block
+ * @param boolean $in_block
  *   Show in block this currency rate.
  *
  * @return mixed
