@@ -43,8 +43,7 @@ function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
  *   The simple_xml object to foreach in.
  *
  * @param string $lang
- *   Languages are: 'en', 'ru', 'ro', 'mo' or 'md'.
- *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
+ *   Language to store.
  */
 function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
   $attribs = $simple_xml->attributes();
