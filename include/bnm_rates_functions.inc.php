@@ -43,11 +43,8 @@ function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
  * @param string $lang
  *   Language ('en', 'ru', 'ro', 'mo' or 'md'.
  *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
- *
- * @throws \Exception
- * @throws \InvalidMergeQueryException
  */
-function bnm_rates_store_data($simple_xml, $lang) {
+function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
   $attribs = $simple_xml->attributes();
   $valute_array = $simple_xml->children();
   foreach ($valute_array as $valute) {
@@ -95,7 +92,7 @@ function bnm_rates_store_data($simple_xml, $lang) {
  * @param string $lang
  *   Language ('en', 'ru', 'ro', 'mo' or 'md'.
  *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
- * @param boolean $in_block
+ * @param bool $in_block
  *   Show in block this currency rate.
  *
  * @return mixed
