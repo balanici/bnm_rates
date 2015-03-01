@@ -11,7 +11,7 @@
  * Implements hook_help().
  *
  * @param string $path
- *   Url path
+ *   Url path.
  * @param mixed $arg
  *   Args passed to function.
  *   See on drupal.org for this hook.
@@ -43,7 +43,8 @@ function bnm_rates_block_info() {
  * Implements hook_block_view().
  *
  * @param string $delta
- *   The block id
+ *   The block id.
+ *
  * @return array $block
  *   This array contains info about blocks for this module.
  */

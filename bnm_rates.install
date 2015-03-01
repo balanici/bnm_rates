@@ -9,6 +9,7 @@
 
 /**
  * Implements hook_schema().
+ *
  * @return array $schema
  *   Array which contains info about tables fields.
  */
