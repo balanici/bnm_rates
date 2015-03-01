@@ -17,8 +17,9 @@ function bnm_rates_init() {
 /**
  * Implements hook_help().
  *
- * @param $path String
- * @param $arg mixed
+ * @param string
+ * @param mixed
+ *
  * @return null|string
  */
 function bnm_rates_help($path, $arg) {
@@ -29,19 +30,14 @@ function bnm_rates_help($path, $arg) {
 
 /**
  * Implements hook_menu().
- *
  * @return mixed
  */
-
 function bnm_rates_menu() {
 
 }
 
-
-
 /**
  * Implements hook_block_info().
- *
  * @return mixed
  */
 function bnm_rates_block_info() {
@@ -55,7 +51,8 @@ function bnm_rates_block_info() {
 /**
  * Implements hook_block_view().
  *
- * @param string $delta
+ * @param string
+ *
  * @return array
  */
 function bnm_rates_block_view($delta = '') {

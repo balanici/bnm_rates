@@ -1,12 +1,13 @@
 /*bnm-rates-block-rates*/
 #bnm-rates-block-rates .currency_value {
-    font-weight: bold;
-    text-align: right;
-    float: right;
-    width: 30%;
+  font-weight: bold;
+  text-align: right;
+  float: right;
+  width: 30%;
 }
+
 #bnm-rates-block-rates .currency-name {
-    width: 70%;
-    word-wrap: break-word;
+  width: 70%;
+  word-wrap: break-word;
 }
 /*end of bnm-rates-block-rates*/

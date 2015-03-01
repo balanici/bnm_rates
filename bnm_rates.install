@@ -6,8 +6,10 @@
  * This module provides a lists all of the
  * exchange rates for today.
  */
+
 /**
- * Implements hook_schema
+ * Implements hook_schema().
+ *
  * @return mixed
  */
 function bnm_rates_schema() {
@@ -95,18 +97,4 @@ function bnm_rates_schema() {
     'unique keys' => array('valute-date' => array('valute_id', 'date')),
   );
   return $schema;
-}
-
-/**
- * Implements of hook_install
- */
-function bnm_rates_install() {
-
-}
-
-/**
- * Implements hook_uninstall
- */
-function bnm_rates_uninstall() {
-
 }
