@@ -37,6 +37,13 @@ function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
 }
 
 /**
+ * @defgroup dbactions Database actions
+ * @{
+ * These functions perform some of database CRUDs.
+ *
+ */
+
+/**
  * Stores xmldata into database.
  *
  * @param SimpleXMLElement $simple_xml
@@ -126,3 +133,7 @@ function bnm_rates_get($date = '', $lang = 'en', $in_block = FALSE) {
 
   return $result;
 }
+
+/**
+ * @} End of "dbactions".
+ */
