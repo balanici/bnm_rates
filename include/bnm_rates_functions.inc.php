@@ -91,15 +91,15 @@ function bnm_rates_store_data($simple_xml, $lang) {
  * watchdog.
  *
  * @param string date
- *  The date of currency rates.
+ *   The date of currency rates.
  * @param string lang
- *  Language ('en', 'ru', 'ro', 'mo' or 'md'.
- *  ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
+ *   Language ('en', 'ru', 'ro', 'mo' or 'md'.
+ *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
  * @param boolean in_block
- *  Show in block this currency rate.
+ *   Show in block this currency rate.
  *
  * @return mixed
- *  Array of currency rates.
+ *   Array of currency rates.
  */
 function bnm_rates_get($date = '', $lang = 'en', $in_block = FALSE) {
   if (empty($date)) {
