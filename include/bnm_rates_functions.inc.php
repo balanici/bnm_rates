@@ -86,7 +86,6 @@ function bnm_rates_store_data($simple_xml, $lang) {
  * @param string
  * @param string
  * @param bool
- *
  * @return mixed
  */
 function bnm_rates_get($date = '', $lang = 'en', $in_block = FALSE) {
