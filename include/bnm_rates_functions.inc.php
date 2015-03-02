@@ -90,6 +90,7 @@ function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
  *
  * @see bnm_rates_pull_xmldata()
  *
+ * @see bnm_rates_store_data()
  * @param bool $in_block
  *   Show in block this currency rate.
  *
