@@ -89,10 +89,11 @@ function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
  *   The date of currency rates.
  *
  * @see bnm_rates_pull_xmldata()
+ *
  * @param bool $in_block
  *   Show in block this currency rate.
  *
- * @return mixed
+ * @return array $result
  *   Array of currency rates.
  */
 function bnm_rates_get($date = '', $lang = 'en', $in_block = FALSE) {
