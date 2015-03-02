@@ -9,9 +9,6 @@
 
 /**
  * Implements hook_schema().
- *
- * @return array $schema
- *   Array which contains info about tables fields.
  */
 function bnm_rates_schema() {
   $schema['bnm_currency'] = array(
