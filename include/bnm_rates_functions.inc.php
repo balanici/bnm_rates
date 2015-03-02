@@ -37,12 +37,10 @@ function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
 /**
  * Saves xmldata into database.
  *
- * @param $simple_xml
+ * @param SimpleXMLElement $simple_xml
  *   The simple_xml object to foreach in.
  *
- * @param $lang
- *   Languages are: 'en', 'ru', 'ro', 'mo' or 'md'.
- *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
+ * @see bnm_rates_pull_xmldata()
  *
  */
 function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
@@ -91,6 +89,7 @@ function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
  * @param string $date
  *   The date of currency rates.
  *
+ * @see bnm_rates_pull_xmldata()
  * @param string $lang
  *   Language ('en', 'ru', 'ro', 'mo' or 'md'.
  *   ro=mo=md - this means the same language: Romanian, MOldavian or MolDavian.
