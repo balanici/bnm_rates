@@ -12,7 +12,11 @@
  */
 function bnm_rates_help($path, $arg) {
   if ($path == 'admin/help#bnm_rates') {
-    return t('Module bnm_rates pulls xml from bnm.org and displays exchange rates');
+    return t('Module bnm_rates pulls <a href="@xml">xml</a> from
+    <a href="@bnm">www.bnm.org</a> and displays exchange rates',
+      array('@xml' => 'http://www.bnm.org/en/' .
+        'official_exchange_rates?get_xml=1&date=' . date('d.m.Y'),
+        '@bnm' => 'http://www.bnm.org'));
   }
 }
 
@@ -64,7 +68,7 @@ function bnm_rates_theme($existing, $type, $theme, $path) {
   $bnm_rates_themes = array(
     'bnm_rates_block_rates' => array(
       'variables' => array('rates' => NULL, 'limit' => 10),
-      'template' => 'templates/bnm_rates_block_rates',
+      'template' => 'templates/bnm_rates',
     ),
   );
 
