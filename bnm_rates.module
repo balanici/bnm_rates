@@ -12,11 +12,13 @@
  */
 function bnm_rates_help($path, $arg) {
   if ($path == 'admin/help#bnm_rates') {
-    return t('Module bnm_rates pulls <a href="@xml">xml</a> from
-    <a href="@bnm">www.bnm.org</a> and displays exchange rates',
-      array('@xml' => 'http://www.bnm.org/en/' .
+    return t('Module bnm_rates pulls <a href="@xml">xml</a> from ' .
+             '<a href="@bnm">www.bnm.org</a> and displays exchange rates.',
+      array(
+        '@xml' => 'http://www.bnm.org/en/' .
         'official_exchange_rates?get_xml=1&date=' . date('d.m.Y'),
-        '@bnm' => 'http://www.bnm.org'));
+        '@bnm' => 'http://www.bnm.org'
+      ));
   }
 }
 

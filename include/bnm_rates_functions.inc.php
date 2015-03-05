@@ -48,7 +48,7 @@ function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
   foreach ($valute_array as $valute) {
     $attr = $valute->attributes();
     $valute_id = (string) $attr['ID'];
-    $currency_record = db_merge('bnm_currency')
+    db_merge('bnm_currency')
       ->key(array(
         'valute_id' => (int) $valute_id,
         'lang' => $lang,
@@ -63,7 +63,7 @@ function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
         ))
       ->execute();
 
-    $rates_record = db_merge('bnm_exchange_rate')
+    db_merge('bnm_exchange_rate')
       ->key(array(
         'valute_id' => (int) $valute_id,
         'date' => (string) $attribs['Date'],
