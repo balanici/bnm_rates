@@ -60,6 +60,13 @@ function bnm_rates_schema() {
         'not null' => TRUE,
         'default' => '0',
       ),
+      'weight' => array(
+        'description' => 'The sortable weight for this item',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
     ),
     'primary key' => array('valute_id', 'lang'),
   );

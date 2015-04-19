@@ -8,6 +8,25 @@
  */
 
 /**
+ * Implements hook_menu().
+ */
+function bnm_rates_menu() {
+  $items['admin/config/bnm_rates'] = array(
+    'title' => 'BNM rates settings form',
+    'description' => 'Show a page with a sortable tabledrag form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bnm_rates_settings_form'),
+    'access callback' => TRUE,
+    'file' => 'include/bnm_rates_settings_form.inc.php',
+  );
+
+
+
+  return $items;
+}
+
+
+/**
  * Implements hook_help().
  */
 function bnm_rates_help($path, $arg) {
@@ -72,6 +91,10 @@ function bnm_rates_theme($existing, $type, $theme, $path) {
       'variables' => array('rates' => NULL, 'limit' => 10),
       'template' => 'templates/bnm_rates',
     ),
+//    'bnm_rates_settings' => array(
+//      'variables' => array('rates' => NULL, 'limit' => 10),
+//      'template' => 'templates/bnm_rates',
+//    ),
   );
 
   return $bnm_rates_themes;
