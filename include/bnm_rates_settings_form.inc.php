@@ -7,6 +7,8 @@
 function bnm_rates_settings_form($form_state) {
   global $language;
   $lang = $language->language;
+
+
   $currencies = bnm_rates_currency_list($lang);
 
   $form = array();
@@ -94,6 +96,9 @@ function bnm_rates_settings_form_submit($form, &$form_state) {
 
 
 function bnm_rates_currency_list($lang = 'en') {
+  if (in_array($lang, array('ro', 'mo'))) {
+    $lang = 'md';
+  }
   $query = "SELECT valute_id, char_code, currency_name, lang, in_block, weight
             FROM {bnm_currency}
             WHERE lang = :lang
