@@ -44,6 +44,8 @@ function bnm_rates_pull_xmldata($date = '', $lang = 'en') {
  */
 function bnm_rates_store_data(SimpleXMLElement $simple_xml, $lang) {
   $attribs = $simple_xml->attributes();
+  $block_title = (string) 'BNM ' . $attribs['name'] . '  @date';
+  variable_set('bnm_rates_block_title_' . $lang, $block_title);
   $valute_array = $simple_xml->children();
   foreach ($valute_array as $valute) {
     $attr = $valute->attributes();
@@ -107,7 +109,7 @@ function bnm_rates_get($date = '', $lang = 'en', $in_block = FALSE) {
             WHERE ber.date = :date " .
             $in_block_where .
             "AND bc.lang = :lang
-            ORDER BY currency_name", array(':date' => $date, ':lang' => $lang));
+            ORDER BY weight", array(':date' => $date, ':lang' => $lang));
   $result = $query->fetchAll();
 
   if (empty($result)) {

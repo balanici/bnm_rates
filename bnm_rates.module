@@ -12,7 +12,7 @@
  */
 function bnm_rates_menu() {
   $items['admin/config/bnm_rates'] = array(
-    'title' => 'BNM rates settings form',
+    'title' => 'BNM rates settings',
     'description' => 'Show a page with a sortable tabledrag form',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('bnm_rates_settings_form'),
@@ -62,14 +62,21 @@ function bnm_rates_block_view($delta = '') {
 
   $date = date("d.m.Y");
   $lang = $language->language;
+  if (in_array($lang, array('ro', 'mo'))) {
+    $lang = 'md';
+  }
+
   switch ($delta) {
     case 'block_bnm_rates':
-      $block['subject'] = t('BNM currency rates @date', array('@date' => $date));
+      $block_subject = variable_get('bnm_rates_block_title_' . $lang,
+                          t('BNM Official exchange rate @date'));
+      $block_subject = t($block_subject, array('@date' => $date));
+      $block['subject'] = $block_subject;
       module_load_include('php', 'bnm_rates', 'include/bnm_rates_functions.inc');
       if ($rates = bnm_rates_get($date, $lang, 1)) {
         $block['content'] = array(
           '#theme' => 'bnm_rates_block_rates',
-          '#title' => t('BNM currency rates'),
+          '#title' => $block_subject,
           '#rates' => $rates,
         );
       }
@@ -91,10 +98,10 @@ function bnm_rates_theme($existing, $type, $theme, $path) {
       'variables' => array('rates' => NULL, 'limit' => 10),
       'template' => 'templates/bnm_rates',
     ),
-//    'bnm_rates_settings' => array(
-//      'variables' => array('rates' => NULL, 'limit' => 10),
-//      'template' => 'templates/bnm_rates',
-//    ),
+    'bnm_rates_settings_form' => array(
+      'render element' => 'form',
+//      'file' => 'templates/bnm_rates_settings.tpl.php',
+    ),
   );
 
   return $bnm_rates_themes;

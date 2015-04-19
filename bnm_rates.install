@@ -63,7 +63,7 @@ function bnm_rates_schema() {
       'weight' => array(
         'description' => 'The sortable weight for this item',
         'type' => 'int',
-        'unsigned' => TRUE,
+        'unsigned' => FALSE,
         'not null' => TRUE,
         'default' => 0,
       ),
@@ -102,4 +102,12 @@ function bnm_rates_schema() {
     'unique keys' => array('valute-date' => array('valute_id', 'date')),
   );
   return $schema;
+}
+
+function bnm_rates_uninstall() {
+  db_delete('variable')
+    ->condition('name', 'bnm_rates_%', 'LIKE')
+    ->execute();
+
+  cache_clear_all('variables', 'cache_bootstrap');
 }
