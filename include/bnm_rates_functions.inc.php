@@ -97,9 +97,7 @@ function bnm_rates_get($date = '', $lang = 'en', $in_block = FALSE) {
   if (empty($date)) {
     $date = date("d.m.Y");
   }
-  if (in_array($lang, array('ro', 'mo'))) {
-    $lang = 'md';
-  }
+
   if ($in_block) {
     $in_block_where = ' AND in_block = 1 ';
   }

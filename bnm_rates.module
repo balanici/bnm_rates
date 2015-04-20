@@ -61,10 +61,7 @@ function bnm_rates_block_view($delta = '') {
   $block = array();
 
   $date = date("d.m.Y");
-  $lang = $language->language;
-  if (in_array($lang, array('ro', 'mo'))) {
-    $lang = 'md';
-  }
+  $lang = bnm_rates_current_lang();
 
   switch ($delta) {
     case 'block_bnm_rates':
