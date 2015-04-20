@@ -106,3 +106,14 @@ function bnm_rates_theme($existing, $type, $theme, $path) {
 
   return $bnm_rates_themes;
 }
+
+
+function bnm_rates_current_lang() {
+  global $language;
+  $lang = $language->language;
+  if (in_array($lang, array('ro', 'mo'))) {
+    $lang = 'md';
+  }
+
+  return $lang;
+}

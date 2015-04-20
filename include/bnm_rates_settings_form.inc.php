@@ -5,9 +5,7 @@
  * @see system_settings_form()
  */
 function bnm_rates_settings_form($form_state) {
-  global $language;
-  $lang = $language->language;
-
+  $lang = bnm_rates_current_lang();
 
   $currencies = bnm_rates_currency_list($lang);
 
@@ -23,10 +21,8 @@ function bnm_rates_settings_form($form_state) {
         '#markup' => check_plain($currency->char_code),
       ),
       'in_block' => array(
-        '#type' => 'textfield',
+        '#type' => 'checkbox',
         '#default_value' => check_plain($currency->in_block),
-        '#size' => 5,
-        '#maxlength' => 1,
       ),
       'weight' => array(
         '#type' => 'weight',
@@ -96,9 +92,6 @@ function bnm_rates_settings_form_submit($form, &$form_state) {
 
 
 function bnm_rates_currency_list($lang = 'en') {
-  if (in_array($lang, array('ro', 'mo'))) {
-    $lang = 'md';
-  }
   $query = "SELECT valute_id, char_code, currency_name, lang, in_block, weight
             FROM {bnm_currency}
             WHERE lang = :lang
