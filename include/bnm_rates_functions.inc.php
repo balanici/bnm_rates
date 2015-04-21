@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Functions which are not to be inside a .module.
